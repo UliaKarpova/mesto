@@ -20,11 +20,11 @@
 }
 
 .popup__item::-moz-placeholder {
-    opacity: 1; 
+    opacity: 1;
 }
 
 .popup__item:-moz-placeholder {
-    opacity: 1; 
+    opacity: 1;
 }
 
 .popup__item:-ms-input-placeholder {
