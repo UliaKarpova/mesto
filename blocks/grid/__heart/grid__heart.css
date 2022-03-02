@@ -1,0 +1,15 @@
+.grid__heart {
+    background-image: url(../../../images/heart.svg);
+    background-position: center;
+    height: 19px;
+    width: 22px;
+}
+
+.grid__heart:hover {
+    opacity: .5;
+    cursor: pointer;
+}
+
+.grid__heart_activ {
+    background-image: url(../../../images/black\ heart.svg);
+}

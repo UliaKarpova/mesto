@@ -1,0 +1,6 @@
+.grid__item {
+    border-radius: 10px;
+    height: 361px;
+    overflow: hidden;
+    position: relative;
+}

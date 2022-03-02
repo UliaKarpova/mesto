@@ -18,3 +18,8 @@
         margin: 0 38px 0 10px;
     }
 }
+
+.profile__edit-button:hover {
+    cursor: pointer;
+    opacity: .6;
+}
