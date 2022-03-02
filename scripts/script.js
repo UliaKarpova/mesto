@@ -9,6 +9,8 @@ let nameInput = document.querySelector('#name');
 let infoInput = document.querySelector('#info');
 let profileName = document.querySelector('.profile__name');
 let profileInfo = document.querySelector('.profile__text');
+nameInput.value = profileName.textContent;
+infoInput.value = profileInfo.textContent;
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
