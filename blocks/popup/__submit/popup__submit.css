@@ -14,7 +14,7 @@
     margin: 18px 36px 37px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 520px) {
     .popup__submit {
         width: 238px;
         height: 46px;

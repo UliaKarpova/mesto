@@ -8,18 +8,12 @@
   margin: 0 25px 16px 3.75px;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 970px) {
     .profile__name {
         font-size: 27px;
         line-height: 33px;
         text-align: center;
+        margin: 22.25px auto 14px;
     }
 }
 
-@media (max-width: 970px) {
-    .profile__name {
-        text-align: center;
-        margin: 22.25px auto 14px;
-        
-    }
-}
