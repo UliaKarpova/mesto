@@ -3,12 +3,14 @@
     position: absolute;
     right: -25px;
     bottom: 24px;
-    background-image: url(../../../images/Edit\ Button.png);
+    background-image: url(../../../images/edit.svg);
+    background-repeat: no-repeat;
+    background-color: #000;
     background-position: center;
     width: 24px;
     height: 24px;
     object-fit: contain;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #fff;
     box-sizing: border-box;
 }
 

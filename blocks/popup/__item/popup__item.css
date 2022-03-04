@@ -13,6 +13,9 @@
     text-align: left;
     font-family: inherit;
     padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .popup__item::-webkit-input-placeholder {
