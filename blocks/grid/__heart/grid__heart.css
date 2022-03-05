@@ -1,6 +1,8 @@
 .grid__heart {
     background-image: url(../../../images/heart.svg);
     background-position: center;
+    background-color: #fff;
+    border: none;
     height: 19px;
     width: 22px;
 }

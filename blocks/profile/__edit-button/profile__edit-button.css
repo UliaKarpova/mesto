@@ -1,8 +1,4 @@
 .profile__edit-button {
-    display: inline-block;
-    position: absolute;
-    right: -25px;
-    bottom: 24px;
     background-image: url(../../../images/edit.svg);
     background-repeat: no-repeat;
     background-color: #000;
@@ -12,14 +8,17 @@
     object-fit: contain;
     border: 1px solid #fff;
     box-sizing: border-box;
+    align-self: center;
+    margin-top: 7px;
 }
 
 @media (max-width: 970px) {
     .profile__edit-button {
+        position: absolute;
         width: 18px;
         height: 18px;
-        right: -33px;
-        bottom: 20px;
+        right: -30px;
+        top: 2px;
     }
 }
 
