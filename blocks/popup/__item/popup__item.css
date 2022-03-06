@@ -11,7 +11,7 @@
     letter-spacing: 0em;
     text-align: left;
     font-family: inherit;
-    padding: 0 5px;
+    padding-bottom: 10px;
 }
 
 .popup__item::-webkit-input-placeholder {
@@ -37,7 +37,6 @@
 @media (max-width: 520px) {
     .popup__item {
         width: 238px;
-        height: 27px;
         margin: 0 22px 30px;
     }
 }
