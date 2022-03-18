@@ -1,6 +1,5 @@
 const popupEditProfile = document.querySelector('#edit_profile');
 const editButton = document.querySelector('.profile__edit-button');
-
 let formElement = document.querySelector('.popup__edit-button');
 let nameInput = document.querySelector('#name');
 let infoInput = document.querySelector('#info');
@@ -32,34 +31,6 @@ closeEdit.addEventListener('click', function() {
   togglePopup(popupEditProfile);
 });
 
-const popupAddImage = document.querySelector('#add_image');
-const addButton = document.querySelector('.profile__add-button');
-const closeAddImage = popupAddImage.querySelector('.popup__exit');
-
-addButton.addEventListener('click', function() {
-  togglePopup(popupAddImage);
-
-});
-
-closeAddImage.addEventListener('click', function() {
-  togglePopup(popupAddImage);
-});
-
-const popupLargerImage = document.querySelector('#larger_image');
-const largeImage = document.querySelector('.grid__photo');
-const closeLargerImage = popupLargerImage.querySelector('.popup__exit');
-
-largeImage.addEventListener('click', function() {
-  togglePopup(popupLargerImage);
-});
-
-closeLargerImage.addEventListener('click', function() {
-  togglePopup(popupLargerImage);
-});
-
-
-/*
-
 const initialCards = [
     {
       name: 'Архыз',
@@ -86,30 +57,75 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
+ 
+const cardContainer = document.querySelector('.grid'); 
+const addForm = document.querySelector('.popup__add-button');
 
-  const cardsContainer = document.querySelector('.grid');
-  console.log(cardsContainer);
+function renderCards(item) {
   const template = document.querySelector('.template').content.firstElementChild.cloneNode(true);
-  console.log(template);
-  const cardForm = document.querySelector('.profile__edit-button');
-  cardForm.addEventListener('click', function(){
-    
+  template.querySelector('.grid__photo').src = item.link;
+  template.querySelector('.grid__text').textContent = item.name;
+  const popupLargerImage = template.querySelector('.popup');
+  popupLargerImage.querySelector('.popup-larger__caption').textContent = item.name;
+  popupLargerImage.querySelector('.popup-larger__photo').src = item.link;
+  console.log(popupLargerImage);
+  template.querySelector('.grid__delete-item').addEventListener('click', deleteImage);
+  const like = template.querySelector('.grid__heart');
+  like.addEventListener('click', function() {
+    like.classList.toggle('grid__heart_activ');
   });
-  function renderCards(item) {
-    template.querySelector('.grid__photo').src = item.link;
-    template.querySelector('.grid__text').textContent = item.name;
-    cardsContainer.append(template);
+  const largerImage = template.querySelector('.grid__photo');
+  largerImage.addEventListener('click', function() {
+    togglePopup(popupLargerImage);
+  });
+  cardContainer.append(template);
+  }
+  
 
-    }
-    for (let i = 0; i < cards.length; i++) {
-    cardsContainer.append(cards[i]);
-    }
-    return ;
-    
+  const popupAddImage = document.querySelector('#add_image');
+  const addButton = document.querySelector('.profile__add-button');
+  const closeAddImage = popupAddImage.querySelector('.popup__exit');
+  
+  addButton.addEventListener('click', function() {
+    togglePopup(popupAddImage);
+    });
+  
+  closeAddImage.addEventListener('click', function() {
+    togglePopup(popupAddImage);
+  });
+
+  function deleteImage(event) {
+    const template = event.currentTarget.closest('.grid__item');
+    template.remove();
+  } 
+  
+  
+  
+  addForm.addEventListener('submit', addImage);
+
+
+function addImage(event) {
+  event.preventDefault();
+  const newImage = event.currentTarget.querySelector('#image-link').value;
+  console.log(newImage);
+  const newText = event.currentTarget.querySelector('#image-name').value;
+  initialCards.unshift({name: newText, link: newImage});
+  console.log(initialCards);
+  event.currentTarget.reset();
+  togglePopup(popupAddImage);
+  cardContainer.innerHTML = '';
+  initialCards.map(renderCards);
+  console.log(cardContainer);
   }
 
-  initialCards.map(renderCards).join('');
-  function addObject() {
+  initialCards.map(renderCards);
 
-  }
-  */
+  const closeLargerImage = popupLargerImage.querySelector('.popup__exit');
+
+popupLargerImage.addEventListener('click', function() {
+  togglePopup(popupLargerImage);
+});
+
+closeLargerImage.addEventListener('click', function() {
+  togglePopup(popupLargerImage);
+});

@@ -13,5 +13,6 @@
 }
 
 .grid__heart_activ {
-    background-image: url(../../../images/black\ heart.svg);
+    background-image: url(../../../images/black_heart.svg);
+    opacity: 1;
 }
