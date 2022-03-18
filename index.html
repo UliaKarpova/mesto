@@ -25,59 +25,26 @@
         </section>
 
         <section class="elements">
-            <ul class="grid">
-                <li class="grid__item">
-                    <img class="grid__photo" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаево-Черкесия">
-                    <div class="grid__signature">
-                        <h2 class="grid__text">Карачаево-Черкесия</h2>
-                        <button type="button" class="grid__heart"></button>
-                    </div>
-                </li>
-
-                <li class="grid__item">
-                    <img class="grid__photo" src="./images/kirill-pershin-1404681-unsplash(1).png" alt="Гора Эльбрус">
-                    <div class="grid__signature">
-                        <h2 class="grid__text">Гора Эльбрус</h2>
-                        <button type="button" class="grid__heart"></button>
-                    </div>
-                </li>
-                <li class="grid__item">
-                    <img class="grid__photo" src="./images/kirill-pershin-1556355-unsplash(1).png" alt="Домбай">
-                    <div class="grid__signature">
-                        <h2 class="grid__text">Домбай</h2>
-                        <button type="button" class="grid__heart"></button>
-                    </div>
-                </li>
-                <li class="grid__item">
-                    <img class="grid__photo" src="./images/gornii-altai.jpg" alt="Горный Алтай">
-                    <div class="grid__signature">
-                        <h2 class="grid__text">Горный Алтай</h2>
-                        <button type="button" class="grid__heart"></button>
-                    </div>
-                </li>
-                <li class="grid__item">
-                    <img class="grid__photo" src="./images/krasnaja-polana.jpg" alt="Красная Поляна">
-                    <div class="grid__signature">
-                        <h2 class="grid__text">Красная Поляна</h2>
-                        <button type="button" class="grid__heart"></button>
-                    </div>
-                </li>
-                <li class="grid__item">
-                    <img class="grid__photo" src="./images//kurshskaia-kosa.jpg" alt="Куршская коса">
-                    <div class="grid__signature">
-                        <h2 class="grid__text">Куршская коса</h2>
-                        <button type="button" class="grid__heart"></button>
-                    </div>
-                </li>
-            </ul>
+            <ul class="grid"></ul>
         </section>
     </main>
 
     <footer class="footer">
         <p class="footer__copyright">&copy; Юлия Карпова</p>
     </footer>
+    
+    <template class="template">
+        <li class="grid__item">
+            <img class="grid__photo" src="" alt="">
+            <div class="grid__signature">
+                <h2 class="grid__text"></h2>
+                <button type="button" class="grid__heart"></button>
+            </div>
+            <button type="button" class="grid__delete-item"></button>
+        </li>
+    </template>
 
-    <div class="popup">
+    <div id="edit_profile" class="popup">
         <div class="popup__container">
             <button type="button" class="popup__exit"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -86,6 +53,25 @@
                 <input class="popup__item" id="info" name="info" type="text" value="Исследователь океана" placeholder="Исследователь океана">
                 <button class="popup__submit" type="submit">Сохранить</button>
             </form>
+        </div>
+    </div>
+    <div id="add_image" class="popup popup_opened">
+        <div class="popup__container">
+            <button type="button" class="popup__exit"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form name="add-image" class="popup__add-button">
+                <input class="popup__item popup__name" id="image-name" name="image-name" type="text" value="" placeholder="Название">
+                <input class="popup__item popup__link" id="image-link" name="image-link" type="url" value="" placeholder="Ссылка на картинку">
+                <button class="popup__submit" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div id="larger_image" class="popup">
+        <figure class="popup-3__container">
+            <button type="button" class="popup__exit"></button>
+            <img class="popup-3__photo" src="" alt="">
+            <figcaption class="popup-3__caption"></figcaption>
+        </figure>
         </div>
     </div>
     <script src="./scripts/script.js"></script>

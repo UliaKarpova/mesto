@@ -4,6 +4,7 @@
     border: none;
     height: 32px;
     width: 32px;
+    padding: 0;
     background-size: contain;
     background-position: center;
     position: absolute;
