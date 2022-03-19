@@ -33,99 +33,119 @@ closeEdit.addEventListener('click', function() {
 
 const initialCards = [
     {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      name: 'Обское море',
+      link: 'https://images.unsplash.com/photo-1595933868307-5a7083dfb921?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80'
     },
     {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+      name: 'Горный Алтай',
+      link: 'https://images.unsplash.com/photo-1577033226943-58e28a0d65d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
     },
     {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      name: 'Эльбрус',
+      link: 'https://images.unsplash.com/photo-1626518139514-65676cf25bac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
     },
     {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      name: 'Мыс Острый',
+      link: 'https://images.unsplash.com/photo-1636363880339-dc1c020d3e8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fCVEMCVCRiVEMSU4MCVEMCVCOCVEMSU4MCVEMCVCRSVEMCVCNCVEMCVCMCUyMCVEMSU4MCVEMCVCRSVEMSU4MSVEMSU4MSVEMCVCOCVEMCVCOHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
     },
     {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      name: 'Карелия',
+      link: 'https://images.unsplash.com/photo-1630763741321-16e7bff61e2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
     },
     {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+      name: 'Красная Поляна',
+      link: 'https://images.unsplash.com/photo-1603787292746-92adce40cbef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80'
     }
   ];
  
 const cardContainer = document.querySelector('.grid'); 
-const addForm = document.querySelector('.popup__add-button');
 
 function renderCards(item) {
   const template = document.querySelector('.template').content.firstElementChild.cloneNode(true);
   template.querySelector('.grid__photo').src = item.link;
   template.querySelector('.grid__text').textContent = item.name;
-  const popupLargerImage = template.querySelector('.popup');
-  popupLargerImage.querySelector('.popup-larger__caption').textContent = item.name;
-  popupLargerImage.querySelector('.popup-larger__photo').src = item.link;
-  console.log(popupLargerImage);
-  template.querySelector('.grid__delete-item').addEventListener('click', deleteImage);
-  const like = template.querySelector('.grid__heart');
-  like.addEventListener('click', function() {
-    like.classList.toggle('grid__heart_activ');
-  });
+  template.querySelector('.grid__photo').setAttribute('alt', item.name);
+
   const largerImage = template.querySelector('.grid__photo');
-  largerImage.addEventListener('click', function() {
+  largerImage.addEventListener('click', function () {
+    popupLargerImage.querySelector('.popup-larger__caption').textContent = item.name;
+    popupLargerImage.querySelector('.popup-larger__photo').src = item.link;
+    popupLargerImage.querySelector('.popup-larger__photo').setAttribute('alt', item.name);
     togglePopup(popupLargerImage);
   });
+
+  const deleteItem = template.querySelector('.grid__delete-item');
+  deleteItem.addEventListener('click', deleteImage);
+
+  const like = template.querySelector('.grid__heart');
+  like.addEventListener('click', likeToggle);
+ 
   cardContainer.append(template);
-  }
+}
   
+function deleteImage(event) {
+  const template = event.currentTarget.closest('.grid__item');
+  template.remove();
+} 
 
-  const popupAddImage = document.querySelector('#add_image');
-  const addButton = document.querySelector('.profile__add-button');
-  const closeAddImage = popupAddImage.querySelector('.popup__exit');
-  
-  addButton.addEventListener('click', function() {
-    togglePopup(popupAddImage);
-    });
-  
-  closeAddImage.addEventListener('click', function() {
-    togglePopup(popupAddImage);
-  });
+function likeToggle(event) {
+  event.currentTarget.classList.toggle('grid__heart_activ');
+}
 
-  function deleteImage(event) {
-    const template = event.currentTarget.closest('.grid__item');
-    template.remove();
-  } 
-  
-  
-  
-  addForm.addEventListener('submit', addImage);
+const popupLargerImage = document.querySelector('#larger_image');
+const closeLargerImage = popupLargerImage.querySelector('.popup__exit');
+closeLargerImage.addEventListener('click', function() {
+  togglePopup(popupLargerImage);
+  popupLargerImage.querySelector('.popup-larger__caption').textContent = "";
+  popupLargerImage.querySelector('.popup-larger__photo').src = "";
+  popupLargerImage.querySelector('.popup-larger__photo').setAttribute('alt', "");
+});
 
+const popupAddImage = document.querySelector('#add_image');
+const addButton = document.querySelector('.profile__add-button');
+const closeAddImage = popupAddImage.querySelector('.popup__exit');
+const addForm = popupAddImage.querySelector('.popup__add-button');
+
+addButton.addEventListener('click', function() {
+  togglePopup(popupAddImage);
+});
+  
+closeAddImage.addEventListener('click', function() {
+  togglePopup(popupAddImage);
+});
+
+function deleteImage(event) {
+  const template = event.currentTarget.closest('.grid__item');
+  template.remove();
+} 
+
+addForm.addEventListener('submit', addImage);
 
 function addImage(event) {
   event.preventDefault();
-  const newImage = event.currentTarget.querySelector('#image-link').value;
-  console.log(newImage);
-  const newText = event.currentTarget.querySelector('#image-name').value;
-  initialCards.unshift({name: newText, link: newImage});
-  console.log(initialCards);
+  const template = document.querySelector('.template').content.firstElementChild.cloneNode(true);
+  template.querySelector('.grid__photo').src = event.currentTarget.querySelector('#image-link').value;
+  template.querySelector('.grid__text').textContent = event.currentTarget.querySelector('#image-name').value;
+  template.querySelector('.grid__photo').setAttribute('alt', event.currentTarget.querySelector('#image-name').value);
+  
+  const deleteItem = template.querySelector('.grid__delete-item');
+  deleteItem.addEventListener('click', deleteImage);
+
+  const like = template.querySelector('.grid__heart');
+  like.addEventListener('click', likeToggle);
+
+  const largerImage = template.querySelector('.grid__photo');
+  largerImage.addEventListener('click', function () {
+    popupLargerImage.querySelector('.popup-larger__caption').textContent = template.querySelector('.grid__text').textContent;
+    popupLargerImage.querySelector('.popup-larger__photo').src = template.querySelector('.grid__photo').src;
+    popupLargerImage.querySelector('.popup-larger__photo').setAttribute('alt', template.querySelector('.grid__text').textContent);
+    togglePopup(popupLargerImage);
+  });
+
+  cardContainer.prepend(template);
   event.currentTarget.reset();
   togglePopup(popupAddImage);
-  cardContainer.innerHTML = '';
-  initialCards.map(renderCards);
-  console.log(cardContainer);
-  }
+}
 
-  initialCards.map(renderCards);
-
-  const closeLargerImage = popupLargerImage.querySelector('.popup__exit');
-
-popupLargerImage.addEventListener('click', function() {
-  togglePopup(popupLargerImage);
-});
-
-closeLargerImage.addEventListener('click', function() {
-  togglePopup(popupLargerImage);
-});
+initialCards.map(renderCards);
+  

@@ -41,13 +41,7 @@
                 <button type="button" class="grid__heart"></button>
             </div>
             <button type="button" class="grid__delete-item"></button>
-            <div id="larger_image" class="popup">
-                <figure class="popup-larger__container">
-                <button type="button" class="popup__exit"></button>
-                <img class="popup-larger__photo" src="" alt="">
-                <figcaption class="popup-larger__caption"></figcaption>
-                </figure>
-            </div>
+            
         </li>
     </template>
 
@@ -73,7 +67,12 @@
             </form>
         </div>
     </div>
-    
+    <div id="larger_image" class="popup popup-larger">
+        <figure class="popup-larger__container">
+        <button type="button" class="popup__exit"></button>
+        <img class="popup-larger__photo" src="" alt="">
+        <figcaption class="popup-larger__caption"></figcaption>
+        </figure>
     </div>
     <script src="./scripts/script.js"></script>
 </body>

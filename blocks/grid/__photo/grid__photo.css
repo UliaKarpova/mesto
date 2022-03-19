@@ -4,8 +4,10 @@
     object-fit: cover;
     z-index: 0;
     margin-bottom: -4px;
+    opacity: .8; /*сделала, так как на белом фоне фото не видно белую корзину*/
 }
 
 .grid__photo:hover {
     cursor: pointer;
+    opacity: .5;
 }
