@@ -13,3 +13,10 @@
     margin: -25px 36px 13px;
     max-width: 358px;
 }
+
+@media (max-width: 520px) {
+    .popup__item-error_visible {
+        width: 238px;
+        margin: -25px 22px 13px;
+    }
+}
