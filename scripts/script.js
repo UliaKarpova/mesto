@@ -3,6 +3,8 @@ const editButton = document.querySelector('.profile__edit-button');
 const formElement = document.querySelector('.popup__edit-button');
 const nameInput = document.querySelector('#name');
 const infoInput = document.querySelector('#info');
+const imageName = document.querySelector('#image-name');
+const imageLink = document.querySelector('#image-link');
 const profileName = document.querySelector('.profile__name');
 const profileInfo = document.querySelector('.profile__text');
 const closeEdit = popupEditProfile.querySelector('.popup__exit');
@@ -42,6 +44,7 @@ const closeAddImage = popupAddImage.querySelector('.popup__exit');
 const addForm = popupAddImage.querySelector('.popup__add-button');
 const template = document.querySelector('.template');
 const elements = initialCards.reverse().map(createCard);
+const popups = document.querySelectorAll('.popup');
 
 function openPopup (popup) {
   popup.classList.add('popup_opened');
@@ -49,6 +52,14 @@ function openPopup (popup) {
 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
+  const errorMessages = popup.querySelectorAll('.popup__item-error');
+  errorMessages.forEach((errorElement) => {
+    errorElement.classList.remove('popup__item-error_visible');
+  });
+  const errorBorder = popup.querySelectorAll('.popup__item');
+  errorBorder.forEach((border) => {
+    border.classList.remove('popup__item_type_error');
+  });
 }
 
 function formSubmitHandler(evt) {
@@ -77,7 +88,6 @@ function createCard(item) {
 
   const like = element.querySelector('.grid__heart');
   like.addEventListener('click', likeToggle);
-  console.log(element);
   return element;
 }
 
@@ -123,6 +133,8 @@ closeLargerImage.addEventListener('click', function() {
 });
 
 addButton.addEventListener('click', function() {
+  imageName.value = "";
+  imageLink.value = "";
   openPopup(popupAddImage);
 });
   
@@ -131,3 +143,16 @@ closeAddImage.addEventListener('click', function() {
 });
 
 addForm.addEventListener('submit', addImage);
+
+popups.forEach((popup) => {
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    }
+  });
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
+  });
+});
