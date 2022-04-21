@@ -50,9 +50,9 @@
             <button type="button" class="popup__exit"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="profile" class="popup__form popup__edit-button" novalidate>
-                <input class="popup__item" minlength="2" maxlength="40" id="name" name="name" type="text" value="Жак-Ив Кусто" placeholder="Жак-Ив Кусто" required>
+                <input class="popup__item" minlength="2" maxlength="40" id="name" name="name" type="text" value="" placeholder="Жак-Ив Кусто" required>
                 <span class="popup__item-error name-error"></span>
-                <input class="popup__item" minlength="2" maxlength="200" id="info" name="info" type="text" value="Исследователь океана" placeholder="Исследователь океана" required>
+                <input class="popup__item" minlength="2" maxlength="200" id="info" name="info" type="text" value="" placeholder="Исследователь океана" required>
                 <span class="popup__item-error info-error"></span>
                 <button class="popup__submit" type="submit">Сохранить</button>
             </form>
@@ -78,7 +78,8 @@
         <figcaption class="popup-larger__caption"></figcaption>
         </figure>
     </div>
-    <script src="./scripts/validate.js"></script>
-    <script src="./scripts/script.js"></script>
+    <script type="module" src="./scripts/Card.js"></script>
+    <script type="module" src="./scripts/FormValidator.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
