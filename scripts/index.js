@@ -51,29 +51,22 @@ const popupAddImage = document.querySelector('#add_image');
 const addButton = document.querySelector('.profile__add-button');
 const addForm = popupAddImage.querySelector('.popup__add-button');
 const elements = initialCards.reverse().map((item) => {
-  const card = new Card(item, '.template');
-  const element = card.createCard();
-  return element;
+  return addCard(item);
 });
 
 const addImageButton = addForm.querySelector('.popup__submit');
 const popups = document.querySelectorAll('.popup');
 
-function deleteErrors(popup) {
-  const errorMessages = popup.querySelectorAll('.popup__item-error');
-  errorMessages.forEach((errorElement) => {
-    errorElement.classList.remove('popup__item-error_visible');
-  });
-  const errorBorder = popup.querySelectorAll('.popup__item');
-  errorBorder.forEach((border) => {
-    border.classList.remove('popup__item_type_error');
-  });
-}
-
 const profileValid = new FormValidator(settings, profileForm);
 profileValid.enableValidation();
 const addImageValid = new FormValidator(settings, addForm);
 addImageValid.enableValidation();
+
+function addCard(item) {
+  const card = new Card(item, '.template');
+  const element = card.createCard();
+  return element;
+}
 
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
@@ -102,12 +95,7 @@ function addImage(event) {
   event.preventDefault();
   const addImage = {link: imageLink.value, 
       name: imageName.value};
-  const addCard = new Card(addImage, '.template');
-  const addItem = addCard.createCard();
-  renderCard(addItem);
-  addForm.reset();
-  addImageButton.disabled = true;
-  addImageButton.classList.add('popup__submit_disabled');
+  renderCard(addCard(addImage));
   closePopup(popupAddImage);
 }
 
@@ -120,14 +108,14 @@ elements.forEach((element) => {
 editButton.addEventListener('click', function() {
   nameInput.value = profileName.textContent;
   infoInput.value = profileInfo.textContent;
-  deleteErrors(popupEditProfile);
+  profileValid.resetValidation();
   openPopup(popupEditProfile);
 });
 
 addButton.addEventListener('click', function() {
   imageName.value = "";
   imageLink.value = "";
-  deleteErrors(popupAddImage);
+  addImageValid.resetValidation();
   openPopup(popupAddImage);
 });
   

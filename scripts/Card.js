@@ -1,5 +1,5 @@
-const popupLargerImage = document.querySelector('.popup-larger');
 import {openPopup} from './openPopup_closePopup.js';
+import {popupLargerImage, caption, photo} from './cardConst.js';
 
 export class Card {
     constructor(item, templateSelector) {
@@ -25,9 +25,9 @@ export class Card {
     
     _setEventListeners() {
       this._element.querySelector('.grid__photo').addEventListener('click', () => {
-            popupLargerImage.querySelector('.popup-larger__caption').textContent = this._name;
-            popupLargerImage.querySelector('.popup-larger__photo').src = this._link;
-            popupLargerImage.querySelector('.popup-larger__photo').setAttribute('alt', this._name);
+            caption.textContent = this._name;
+            photo.src = this._link;
+            photo.setAttribute('alt', this._name);
             openPopup(popupLargerImage);
         });
    
@@ -44,9 +44,9 @@ export class Card {
       return this._element;
     }
 
-  _deleteImage(event) {
-      const item = event.currentTarget.closest('.grid__item');
-      item.remove();
+  _deleteImage() {
+      this._element.remove();
+      this._element = null;
   } 
       
   _likeToggle(event) {

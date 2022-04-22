@@ -22,7 +22,7 @@ export class FormValidator {
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   };
-  
+
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
@@ -36,7 +36,7 @@ export class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._toggleButtonState(this._inputList, this._buttonElement);
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', () => {
+        inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState(this._inputList, this._buttonElement);
       });
@@ -46,16 +46,23 @@ export class FormValidator {
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
-      });
+    });
     this._setEventListeners();
     };
   
+    resetValidation() {
+      this._toggleButtonState();
+      this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement);
+      });
+    }
+
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
       });
   }
-  
+
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
