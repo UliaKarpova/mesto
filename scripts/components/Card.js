@@ -1,5 +1,4 @@
-import {openPopup} from './openPopup_closePopup.js';
-import {popupLargerImage, caption, photo} from './cardConst.js';
+import { popupWithImage } from "../pages/index.js";
 
 export class Card {
     constructor(item, templateSelector) {
@@ -15,24 +14,19 @@ export class Card {
 
     createCard() {
         this._element = this._getCard();
+        this._cardImage = this._element.querySelector('.grid__photo');
         this._setEventListeners();
-        const cardImage = this._element.querySelector('.grid__photo');
-        cardImage.src = this._link;
+        this._cardImage.src = this._link;
         this._element.querySelector('.grid__text').textContent = this._name;
-        cardImage.setAttribute('alt', this._name);
+        this._cardImage.setAttribute('alt', this._name);
         return this._element;
     }
     
     _setEventListeners() {
-      this._element.querySelector('.grid__photo').addEventListener('click', () => {
-            caption.textContent = this._name;
-            photo.src = this._link;
-            photo.setAttribute('alt', this._name);
-            openPopup(popupLargerImage);
-        });
-   
-      const deleteItem = this._element.querySelector('.grid__delete-item');
-      deleteItem.addEventListener('click', (event) => {
+        this._cardImage.addEventListener('click', (evt) => {
+            popupWithImage.open(evt)});
+        const deleteItem = this._element.querySelector('.grid__delete-item');
+        deleteItem.addEventListener('click', (event) => {
           this._deleteImage(event);
       });
     
@@ -44,12 +38,12 @@ export class Card {
       return this._element;
     }
 
-  _deleteImage() {
+    _deleteImage() {
       this._element.remove();
       this._element = null;
-  } 
+    } 
       
-  _likeToggle(event) {
+    _likeToggle(event) {
       event.currentTarget.classList.toggle('grid__heart_activ');
     }
 }
