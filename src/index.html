@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
   <meta name="author" content="Юлия Карпова">
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
@@ -15,7 +14,7 @@
 
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="images/image.jpg" alt="Фото Жак-ив Кусто">
+            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="Фото Жак-ив Кусто">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__edit-button"></button>
@@ -78,6 +77,5 @@
         <figcaption class="popup-larger__caption"></figcaption>
         </figure>
     </div>
-    <script type="module" src="./scripts/pages/index.js"></script>
 </body>
 </html>
