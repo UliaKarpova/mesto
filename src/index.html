@@ -14,8 +14,8 @@
 
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="Фото Жак-ив Кусто">
-            <div class="profile__info">
+            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="Фото Жак-ив Кусто"> 
+                <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__edit-button"></button>
                 <p class="profile__text">Исследователь океана</p>
@@ -62,9 +62,9 @@
             <button type="button" class="popup__exit"></button>
             <h2 class="popup__title">Новое место</h2>
             <form name="add-image" class="popup__form popup__add-button" novalidate>
-                <input class="popup__item" minlength="2" maxlength="20" id="image-name" name="image-name" type="text" value="" placeholder="Название" required>
+                <input class="popup__item" minlength="2" maxlength="20" id="image-name" name="name" type="text" value="" placeholder="Название" required>
                 <span class="popup__item-error image-name-error"></span>
-                <input class="popup__item" id="image-link" name="image-link" type="url" value="" placeholder="Ссылка на картинку" required>
+                <input class="popup__item" id="image-link" name="link" type="url" value="" placeholder="Ссылка на картинку" required>
                 <span class="popup__item-error image-link-error"></span>
                 <button class="popup__submit" type="submit">Создать</button>
             </form>

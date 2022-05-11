@@ -10,8 +10,6 @@ export const settings = {
 }
 export const editButton = document.querySelector('.profile__edit-button');
 export const profileForm = document.querySelector('.popup__edit-button');
-export const imageName = document.querySelector('#image-name');
-export const imageLink = document.querySelector('#image-link');
 export const initialCards = [
   {
     name: 'Обское море',

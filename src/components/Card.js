@@ -1,10 +1,9 @@
-import { popupWithImage } from "../pages/index.js";
-
 export class Card {
-    constructor(item, templateSelector) {
+    constructor(item, templateSelector, callback) {
         this._templateSelector = templateSelector;
         this._name = item.name;
         this._link = item.link;
+        this._callback = callback;
     }
 
     _getCard() {
@@ -24,18 +23,18 @@ export class Card {
     
     _setEventListeners() {
         this._cardImage.addEventListener('click', (evt) => {
-            popupWithImage.open(evt)});
+          this._callback(evt);
+        });
         const deleteItem = this._element.querySelector('.grid__delete-item');
         deleteItem.addEventListener('click', (event) => {
           this._deleteImage(event);
-      });
-    
-      const like = this._element.querySelector('.grid__heart');
-      like.addEventListener('click', (event) => {
-          this._likeToggle(event);
-      });
-
-      return this._element;
+        });
+      
+         this._like = this._element.querySelector('.grid__heart');
+         this._like.addEventListener('click', (event) => {
+            this._likeToggle(event);
+        });
+        return this._element;
     }
 
     _deleteImage() {
@@ -43,7 +42,7 @@ export class Card {
       this._element = null;
     } 
       
-    _likeToggle(event) {
-      event.currentTarget.classList.toggle('grid__heart_activ');
+    _likeToggle() {
+        this._like.classList.toggle('grid__heart_activ');
     }
 }

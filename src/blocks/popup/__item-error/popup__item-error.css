@@ -3,6 +3,7 @@
 }
 
 .popup__item-error_visible {
+    position: absolute;
     display: block;
     font-size: 12px;
     font-weight: 400;

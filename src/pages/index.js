@@ -1,17 +1,20 @@
-import './index.css';
+import './index.css'; 
+
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
+import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import {Section} from '../components/Section.js';
-import {nameInput, infoInput, settings, editButton, profileForm, imageName, imageLink, initialCards, addButton, addForm} from '../utils/indexConst.js';
+import {nameInput, infoInput, settings, editButton, profileForm, initialCards, addButton, addForm} from '../utils/indexConst.js';
 
-export const popupProfileForm = new PopupWithForm('#edit_profile', handleProfileFormSubmit);
-export const popupWithImage = new PopupWithImage('.popup-larger');
-
+const popupProfileForm = new PopupWithForm('#edit_profile', handleProfileFormSubmit);
+popupProfileForm.setEventListeners();
 const popupAddForm = new PopupWithForm('#add_image', addImage);
-const userInfoProfile = new UserInfo({firstSelector: '.profile__name', secondSelector: '.profile__text'});
+popupAddForm.setEventListeners();
+const popupWithImage = new PopupWithImage('.popup-larger');
+popupWithImage.setEventListeners();
+const userInfoProfile = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__text'});
 const profileValid = new FormValidator(settings, profileForm);
 profileValid.enableValidation();
 const addImageValid = new FormValidator(settings, addForm);
@@ -21,33 +24,42 @@ const section = new Section({ items: initialCards,
   '.grid');
 section.rendererItems();
 
+function createNewCard(item) {
+  const card = new Card(item, '.template', openPopupWithImage);
+  return card.createCard();
+};
+
+function openPopupWithImage(evt) {
+  const item = {
+    name: evt.target.alt,
+    link: evt.target.src
+  };
+  popupWithImage.open(item);
+}
+
+function addCard(item) {
+  const element = createNewCard(item);
+  section.addItem(element);
+}
+
+function addImage(item) {
+  addCard(item);
+  popupAddForm.close();
+}
+
 editButton.addEventListener('click', function() {
-  nameInput.value = userInfoProfile.getUserInfo().name;
-  infoInput.value = userInfoProfile.getUserInfo().info;
+  const userInfo = userInfoProfile.getUserInfo();
+  nameInput.value = userInfo.name;
+  infoInput.value = userInfo.info;
   profileValid.resetValidation();
   popupProfileForm.open();
 });
 
 addButton.addEventListener('click', function() {
-  imageName.value = "";
-  imageLink.value = "";
   addImageValid.resetValidation();
   popupAddForm.open();
 });
 
-function addCard(item) {
-  const card = new Card(item, '.template');
-  const element = card.createCard(item);
-  section.addItem(element);
-}
-  
-function addImage() {
-  const imageItem = {link: imageLink.value, 
-  name: imageName.value};
-  addCard(imageItem);
-  popupAddForm.close();
-}
-  
 function handleProfileFormSubmit(item) {
   userInfoProfile.setUserInfo(item);
   popupProfileForm.close();
