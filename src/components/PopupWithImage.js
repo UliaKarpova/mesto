@@ -12,13 +12,5 @@ export class PopupWithImage extends Popup {
         this._image.src = item.link;
         this._image.setAttribute('alt', item.name);
         super.open();
-    };
-
-    close() {
-        super.close();
     }
-    
-    setEventListeners() {
-        super.setEventListeners();
-   }
 }

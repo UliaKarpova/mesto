@@ -29,11 +29,7 @@ function createNewCard(item) {
   return card.createCard();
 };
 
-function openPopupWithImage(evt) {
-  const item = {
-    name: evt.target.alt,
-    link: evt.target.src
-  };
+function openPopupWithImage(item) {
   popupWithImage.open(item);
 }
 

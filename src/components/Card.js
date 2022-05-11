@@ -22,8 +22,8 @@ export class Card {
     }
     
     _setEventListeners() {
-        this._cardImage.addEventListener('click', (evt) => {
-          this._callback(evt);
+        this._cardImage.addEventListener('click', () => {
+          this._callback({name: this._name, link: this._link});
         });
         const deleteItem = this._element.querySelector('.grid__delete-item');
         deleteItem.addEventListener('click', (event) => {
