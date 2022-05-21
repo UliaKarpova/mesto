@@ -6,7 +6,8 @@
     flex-direction: column;
     margin: auto;
     position: relative;
-    top: calc(50% - 165px);
+    top: 50%;
+    transform: translate(0, -50%);
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 }
 

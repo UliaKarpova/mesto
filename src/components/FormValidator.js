@@ -45,10 +45,10 @@ export class FormValidator {
   
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
-        evt.preventDefault();
+      evt.preventDefault();
     });
     this._setEventListeners();
-    };
+  };
   
   resetValidation() {
     this._toggleButtonState();
@@ -60,7 +60,7 @@ export class FormValidator {
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
-      });
+    });
   }
 
   _toggleButtonState() {

@@ -38,3 +38,6 @@ export const initialCards = [
 ];
 export const addButton = document.querySelector('.profile__add-button');
 export const addForm = document.querySelector('.popup__add-button');
+export const avatarChangeForm = document.querySelector('.popup__change-button');
+export const avatarChangeButton = document.querySelector('.profile__edit-avatar');
+
