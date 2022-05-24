@@ -1,24 +1,16 @@
 export class Section {
-    constructor(renderer, containerSelector, api) {
-        this._renderer = renderer;
+    constructor(renderer, containerSelector) {
+        this.renderer = renderer;
         this._container = document.querySelector(containerSelector);
-        this._api = api;
     }
 
-    _rendererItems(items) {
+    rendererItems(items) {
         items.forEach((item) => {
-             this._renderer(item);
+            this.addItem(this.renderer(item));
+            return item;
         });
     }
     
-    addPhotoList() {
-        const data = this._api.getPhotos();
-        data.then((res) => {
-            const items = res;
-            return this._rendererItems(items);
-        }).catch((err) => console.log(err));
-    }
-
     addItem(element) {
        this._container.prepend(element);
     }

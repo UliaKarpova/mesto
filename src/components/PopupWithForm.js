@@ -1,12 +1,11 @@
 import {Popup} from './Popup.js';
 
 export class PopupWithForm extends Popup {
-    constructor(popupSelector, submitCallback, apiMethod) {
+    constructor(popupSelector, apiCallback) {
         super(popupSelector);
         this._form = this._popup.querySelector('.popup__form');
         this._inputList = this._form.querySelectorAll('.popup__item');
-        this._submitCallback = submitCallback;
-        this._apiMethod = apiMethod;
+        this._apiCallback = apiCallback;
         this._submit = this._form.querySelector('.popup__submit');
     }
     
@@ -21,11 +20,8 @@ export class PopupWithForm extends Popup {
     _submitHandler = () => {
         const obj = this._getInputValues();
         this.preloader();
-        this._apiMethod(obj)
-        .then((data) => {
-            this._submitCallback(data);
-        }).catch((err) => console.log(err))
-   }
+        this._apiCallback(obj)
+    }
 
     setEventListeners() {
         super.setEventListeners();
