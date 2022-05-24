@@ -8,6 +8,7 @@ export class Card {
         this._imageDeleteCallback = imageDeleteCallback;
         this._likeDeleteCallback = likeDeleteCallback;
         this._likeAddCallback = likeAddCallback;
+        this._userLiked = this._item.likes.some((like) => like._id === this._userId);
     }
 
     _getCard() {
@@ -41,15 +42,9 @@ export class Card {
         });
         this._likeButton.addEventListener('click', () => {
             if (this._userLiked) {
-                this._likeDeleteCallback(this._item)
-                .then((res) => {
-                    this._deleteLike(res);
-                }).catch((err) => console.log(err))
+                this._deleteLikeCallback();
             } else {
-               this._likeAddCallback(this._item)
-               .then((res) => {
-                this._addLike(res);
-                }).catch((err) => console.log(err))
+               this._addLikeCallback();
             }
         })
         if (this._isUserOwner()) {
@@ -73,15 +68,17 @@ export class Card {
     return this._userLiked;
 }
 
-    _deleteLike(res) {
-        this._likeButton.classList.remove('grid__heart_activ');
+    toggleLike(res) {
+        this._likeButton.classList.toggle('grid__heart_activ');
         this._likesNumber.textContent = res.likes.length;
         this._userLiked = !this._userLiked;
     }
-    
-    _addLike(res) {   
-        this._likeButton.classList.add('grid__heart_activ');
-        this._likesNumber.textContent = res.likes.length;
-        this._userLiked = !this._userLiked;
+ 
+    addLikeApi(addLike) {
+        this._addLikeCallback = addLike;
+    }
+
+    deleteLikeApi(deleteLike) {
+        this._deleteLikeCallback = deleteLike;
     }
 }

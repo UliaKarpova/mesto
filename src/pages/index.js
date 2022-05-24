@@ -17,6 +17,8 @@ const api = new Api({
   }
 });
 
+let userId;
+
 Promise.all([
   api.getInfo(),
   api.getPhotos()
@@ -26,6 +28,7 @@ Promise.all([
   const photos = values[1];
   userInfoProfile.setAvatar(info.avatar);
   userInfoProfile.setUserInfo(info);
+  userId = info._id;
   photos.forEach((photo) => {
   photo.userId = info._id;
   });
@@ -61,6 +64,7 @@ addButton.addEventListener('click', function() {
 });
 
 const popupPredelete = new PopupWithSubmit("#delete-image");
+popupPredelete.setEventListeners();
 
 const popupWithImage = new PopupWithImage('.popup-larger');
 popupWithImage.setEventListeners();
@@ -77,13 +81,10 @@ const addImageValid = new FormValidator(settings, addForm);
 addImageValid.enableValidation();
 
 function addImage(item) {
-  Promise.all([
-    api.addNewCard(item),
-    api.getInfo(),
-  ]).then((values) => {
-    const info = values[1];
-    const newCard = values[0];
-    newCard.userId = info._id;
+    api.addNewCard(item)
+    .then((value) => {
+    const newCard = value;
+    newCard.userId = userId;
     section.addItem(createNewCard(newCard));
     popupAddImageForm.close();
   }).catch((err) => console.log(err));
@@ -91,6 +92,7 @@ function addImage(item) {
 
 function deleteImageOpen(item, element) { 
   popupPredelete.setSubmitAction(() => {
+    popupPredelete.preloader();
     api.deleteImage(item, element)
     .then(() => {
      element.remove();
@@ -98,12 +100,25 @@ function deleteImageOpen(item, element) {
      popupPredelete.close();
     }).catch((err) => console.log(err))
   });
+  popupPredelete.offPreloader("Да");
   popupPredelete.open();
-  popupPredelete.setEventListeners();
+  popupPredelete.submit();
 }
 
 function createNewCard(item) {
-  const card2 = card(item, '.template', openPopupWithImage, deleteImageOpen, deleteLikeApi, addLikeApi);
+  const card2 = card(item, '.template', openPopupWithImage, deleteImageOpen);
+  card2.deleteLikeApi(() => {
+    api.deleteLike(item)
+    .then((res) => {
+      card2.toggleLike(res);
+    }).catch((err) => console.log(err))
+  });
+  card2.addLikeApi(() => {
+    api.addLike(item)
+    .then((res) => {
+      card2.toggleLike(res);
+    }).catch((err) => console.log(err))
+  });
   return card2.createCard();
 }
 
@@ -131,12 +146,4 @@ function openPopupWithImage(item) {
 function getValues(item) {
   nameInput.value = item.name;
   infoInput.value = item.about;
-}
-
-function addLikeApi(item) {
-  return api.addLike(item);
-}
-
-function deleteLikeApi(item) {
-  return api.deleteLike(item);
 }

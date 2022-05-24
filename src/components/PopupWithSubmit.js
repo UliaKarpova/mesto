@@ -12,6 +12,10 @@ export class PopupWithSubmit extends Popup {
 
    setEventListeners() {
         super.setEventListeners();
+       
+    }
+    
+    submit() {
         this._submit.addEventListener('click', this._callback);
     }
    
@@ -19,5 +23,12 @@ export class PopupWithSubmit extends Popup {
         this._submit.removeEventListener('click', this._callback);
         super.close();
     }
+    
+    preloader() {
+        this._submit.textContent = "Удаление...";
+    }
 
+    offPreloader(text) {
+        this._submit.textContent = text;
+    }
 }
