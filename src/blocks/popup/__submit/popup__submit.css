@@ -35,7 +35,6 @@
 
 .popup__submit:hover {
     cursor: pointer;
-    opacity: .8;
 }
 
 .popup__submit_disabled {

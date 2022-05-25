@@ -41,6 +41,7 @@ const section = new Section(createNewCard, ".grid");
 const popupAvatarChange = new PopupWithForm('#change-avatar', newAvatarApi);
 popupAvatarChange.setEventListeners();
 avatarChangeButton.addEventListener('click', () => {
+    avatarChangeValid.resetValidation();
     popupAvatarChange.offPreloader("Сохранить");
     popupAvatarChange.open();
 });
