@@ -41,7 +41,6 @@ const section = new Section(createNewCard, ".grid");
 const popupAvatarChange = new PopupWithForm('#change-avatar', newAvatarApi);
 popupAvatarChange.setEventListeners();
 avatarChangeButton.addEventListener('click', () => {
-    avatarChangeValid.resetValidation();
     popupAvatarChange.offPreloader("Сохранить");
     popupAvatarChange.open();
 });
@@ -49,7 +48,6 @@ avatarChangeButton.addEventListener('click', () => {
 const popupProfileForm = new PopupWithForm('#edit_profile', newProfileInfoApi);
 popupProfileForm.setEventListeners();
 editButton.addEventListener('click', function() {
-  getValues(userInfoProfile.getUserInfo());
   profileValid.resetValidation();
   getValues(userInfoProfile.getUserInfo());
   popupProfileForm.offPreloader("Сохранить");
@@ -59,7 +57,6 @@ editButton.addEventListener('click', function() {
 const popupAddImageForm = new PopupWithForm('#add_image', addImage);
 popupAddImageForm.setEventListeners();
 addButton.addEventListener('click', function() {
-  addImageValid.resetValidation();
   popupAddImageForm.offPreloader("Создать");
   popupAddImageForm.open();
 });
@@ -81,9 +78,12 @@ avatarChangeValid.enableValidation();
 const addImageValid = new FormValidator(settings, addForm);
 addImageValid.enableValidation();
 
-function addImage(item) {
-    api.addNewCard(item)
+function addImage(item) {    
+  popupAddImageForm.preloader();
+  addImageValid.resetValidation();
+  api.addNewCard(item)
     .then((value) => {
+    addImageValid.resetValidation();
     const newCard = value;
     newCard.userId = userId;
     section.addItem(createNewCard(newCard));
@@ -93,6 +93,7 @@ function addImage(item) {
 
 function deleteImageOpen(item, element) { 
   popupPredelete.setSubmitAction(() => {
+    popupPredelete.removeButton();
     popupPredelete.preloader();
     api.deleteImage(item, element)
     .then(() => {
@@ -101,6 +102,7 @@ function deleteImageOpen(item, element) {
      popupPredelete.close();
     }).catch((err) => console.log(err))
   });
+  popupPredelete.activateButton();
   popupPredelete.offPreloader("Да");
   popupPredelete.open();
   popupPredelete.submit();
@@ -124,10 +126,12 @@ function createNewCard(item) {
 }
 
 function newAvatarApi(item) {
+  popupAvatarChange.preloader();
+  avatarChangeValid.resetValidation();
   api.sendNewAvatar(item)
   .then((res) => {
+    avatarChangeValid.resetValidation();
   userInfoProfile.setAvatar(res.avatar);
-  avatarChangeValid.resetValidation();
   popupAvatarChange.close();
 }).catch((err) => console.log(err));
 }

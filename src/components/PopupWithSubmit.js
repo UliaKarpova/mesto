@@ -15,6 +15,14 @@ export class PopupWithSubmit extends Popup {
        
     }
     
+    removeButton() {
+       this._submit.disabled = true;
+    }
+
+    activateButton() {
+        this._submit.disabled = false;
+    }
+
     submit() {
         this._submit.addEventListener('click', this._callback);
     }

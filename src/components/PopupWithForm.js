@@ -19,7 +19,6 @@ export class PopupWithForm extends Popup {
 
     _submitHandler = () => {
         const obj = this._getInputValues();
-        this.preloader();
         this._apiCallback(obj)
     }
 
